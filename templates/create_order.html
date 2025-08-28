@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Cart -->
+  <div class="container py-5 mt-5">
+    {% if carts %}
+      <div class="row">
+        <div class="col-12">
+          <h2 class="mb-4">Оформление заказа</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Cart Items -->
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+
+              <!-- Cart Item 3 -->
+              {% for cart in carts %}
+                <div class="row align-items-center py-3">
+                  <div class="col-md-2">
+                    <img src="{{ cart.product.image.url }}?height=100&width=100" class="img-fluid rounded"
+                         alt="Протеин">
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="mb-1">{{ cart.product.name }}</h6>
+                    <small class="text-muted">{{ cart.quantity }} шт.</small>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <div class="fw-bold text-primary">{{ cart.sum }}₽</div>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex mt-3">
+            <strong class="me-3">Итого:</strong>
+            <strong class="text-primary"> {{ carts.total_sum }}₽</strong>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-6">
+          {% if form.errors %}
+            <div class="container d-flex align-items-center justify-content-center">
+              <div class="alert alert-warning alert-dismissible fade show " role="alert">
+                {% for value in form.errors.values %}
+                  <strong>{{ value }}</strong>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+          {% endif %}
+          <div class="container mt-1">
+            <form action="{% url 'orders:create'%}" method="post">
+              {% csrf_token %}
+              <!-- Имя -->
+              <div class="mb-3">
+                <label for="{{ form.first_name.id_for_label }}" class="form-label">Имя</label>
+                {{ form.first_name }}
+              </div>
+
+              <!-- Фамилия -->
+              <div class="mb-3">
+                <label for="{{ form.last_name.id_for_label }}" class="form-label">Фамилия</label>
+                {{ form.last_name }}
+              </div>
+
+              <!-- Адрес -->
+              <div class="mb-3">
+                <label for="{{ form.address.id_for_label }}" class="form-label">Адрес доставки</label>
+                {{ form.address }}
+              </div>
+
+              <!-- Почта -->
+              <div class="mb-3">
+                <label for="{{ form.email.id_for_label }}" class="form-label">Электронная почта</label>
+                {{ form.email }}
+              </div>
+
+              <!-- Кнопка отправки -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Оформить заказ</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    {% else %}
+      <div class="container-fluid mb-5 min-vh-100">
+        <div class="col-12 ">
+          <h2 class="mb-4">Корзина пуста...</h2>
+        </div>
+        <a href="{% url 'products:catalog' %}" class="btn btn-outline-primary">
+          <i class="fas fa-arrow-left me-2"></i>Продолжить покупки
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock %}

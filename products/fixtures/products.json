@@ -1,0 +1,146 @@
+[
+{
+  "model": "products.product",
+  "pk": 13,
+  "fields": {
+    "name": "Бейсболка Анахайм",
+    "description": "Бейсболка Анахайм",
+    "price": "2100.00",
+    "quantity": 1,
+    "image": "products_images/Бейсболка_Анахайм_Дакс_винтаж.jpg",
+    "category": 8
+  }
+},
+{
+  "model": "products.product",
+  "pk": 14,
+  "fields": {
+    "name": "Бейсболка Торонто",
+    "description": "Бейсболка Торонто",
+    "price": "2100.00",
+    "quantity": 1,
+    "image": "products_images/Бейсболка_Торонто_Мейпл_Лифс_винтаж.jpg",
+    "category": 8
+  }
+},
+{
+  "model": "products.product",
+  "pk": 15,
+  "fields": {
+    "name": "Рюкзак Анахайм",
+    "description": "Рюкзак Анахайм",
+    "price": "3000.00",
+    "quantity": 1,
+    "image": "products_images/Рюкзак_Анахайм_Дакс.jpg",
+    "category": 9
+  }
+},
+{
+  "model": "products.product",
+  "pk": 16,
+  "fields": {
+    "name": "Рюкзак Торонто",
+    "description": "Рюкзак Торонто",
+    "price": "3000.00",
+    "quantity": 1,
+    "image": "products_images/Большой_рюкзак_Торонто_Мейпл_Лифс.jpg",
+    "category": 9
+  }
+},
+{
+  "model": "products.product",
+  "pk": 17,
+  "fields": {
+    "name": "Куртка Анахайм",
+    "description": "Куртка Анахайм",
+    "price": "7000.00",
+    "quantity": 1,
+    "image": "products_images/Куртка_Анахайм_Дакс.jpg",
+    "category": 6
+  }
+},
+{
+  "model": "products.product",
+  "pk": 18,
+  "fields": {
+    "name": "Куртка Торонто",
+    "description": "Куртка Торонто",
+    "price": "7000.00",
+    "quantity": 1,
+    "image": "products_images/Куртка_Торонто_Мейпл_Лифс.jpg",
+    "category": 6
+  }
+},
+{
+  "model": "products.product",
+  "pk": 19,
+  "fields": {
+    "name": "Футболка Торонто",
+    "description": "Футболка Торонто",
+    "price": "3000.00",
+    "quantity": 1,
+    "image": "products_images/Футболка_Торонто_Мейпл_Лифс_classic.jpg",
+    "category": 7
+  }
+},
+{
+  "model": "products.product",
+  "pk": 20,
+  "fields": {
+    "name": "Футболка Анахайм",
+    "description": "Футболка Анахайм",
+    "price": "3000.00",
+    "quantity": 1,
+    "image": "products_images/Футболка_Анахайм_Дакс_sticks.jpg",
+    "category": 7
+  }
+},
+{
+  "model": "products.product",
+  "pk": 21,
+  "fields": {
+    "name": "Худи Торонто",
+    "description": "Худи Торонто",
+    "price": "4500.00",
+    "quantity": 1,
+    "image": "products_images/Толстовка_Торонто_Мейпл_Лифс_на_замке.jpg",
+    "category": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 22,
+  "fields": {
+    "name": "Худи Анахайм",
+    "description": "Худи Анахайм",
+    "price": "4500.00",
+    "quantity": 1,
+    "image": "products_images/Толстовка_Анахайм_Дакс_атрибутика.jpg",
+    "category": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 23,
+  "fields": {
+    "name": "Трико Анахайм",
+    "description": "Трико Анахайм",
+    "price": "3500.00",
+    "quantity": 1,
+    "image": "products_images/Хоккейные_трико_Анахайм_Дакс.jpg",
+    "category": 3
+  }
+},
+{
+  "model": "products.product",
+  "pk": 24,
+  "fields": {
+    "name": "Шорты Анахайм",
+    "description": "Шорты Анахайм",
+    "price": "3700.00",
+    "quantity": 1,
+    "image": "products_images/Шорты_Anaheim_Ducks.jpg",
+    "category": 4
+  }
+}
+]

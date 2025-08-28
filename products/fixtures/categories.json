@@ -1,0 +1,58 @@
+[
+{
+  "model": "products.productcategory",
+  "pk": 3,
+  "fields": {
+    "name": "Трико",
+    "description": ""
+  }
+},
+{
+  "model": "products.productcategory",
+  "pk": 4,
+  "fields": {
+    "name": "Шорты",
+    "description": ""
+  }
+},
+{
+  "model": "products.productcategory",
+  "pk": 5,
+  "fields": {
+    "name": "Худи",
+    "description": ""
+  }
+},
+{
+  "model": "products.productcategory",
+  "pk": 6,
+  "fields": {
+    "name": "Куртки",
+    "description": ""
+  }
+},
+{
+  "model": "products.productcategory",
+  "pk": 7,
+  "fields": {
+    "name": "Футболки",
+    "description": ""
+  }
+},
+{
+  "model": "products.productcategory",
+  "pk": 8,
+  "fields": {
+    "name": "Бейсболки",
+    "description": ""
+  }
+},
+{
+  "model": "products.productcategory",
+  "pk": 9,
+  "fields": {
+    "name": "Рюкзаки",
+    "description": ""
+  }
+}
+]

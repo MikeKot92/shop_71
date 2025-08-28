@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static cache %}
+
+{% block content %}
+
+  <!-- Catalog -->
+  <div class="container py-4">
+    <div class="row">
+      <!-- Filters Sidebar -->
+      <div class="col-lg-3 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Фильтры</h5>
+          </div>
+          <div class="card-body">
+            <!-- Category Filter -->
+            <div class="mb-4">
+              <h6>Категории</h6>
+
+              {% cache 30 categories %}
+              {% for category in categories %}
+                <div class="form-check">
+                  <a href="{% url 'products:category' category.id %}">{{ category.name }}</a>
+
+                </div>
+              {% endfor %}
+              {%  endcache %}
+
+              <div class="form-check">
+                <a href="{% url 'products:catalog' %}">Все товары</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="col-lg-9 ">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
+          <div>
+            <span class="text-muted">Найдено товаров: 89</span>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <select class="form-select form-select-sm" style="width: auto;">
+              <option>По популярности</option>
+              <option>По цене (возрастание)</option>
+              <option>По цене (убывание)</option>
+              <option>По рейтингу</option>
+              <option>Новинки</option>
+            </select>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-outline-secondary btn-sm active">
+                <i class="fas fa-th"></i>
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div class="row g-4" id="products-grid">
+
+
+            {% for product in object_list %}
+              <!-- Product 1 -->
+              <div class="col-lg-4 col-md-6">
+                <div class="card product-card h-100 border-0 shadow-sm">
+                  <div class="position-relative">
+                    <img src="{{ product.image.url }}" class="card-img-top"
+                         alt="Гантели">
+
+                    <div class="product-overlay">
+                      <button class="btn btn-light btn-sm">
+                        <i class="fas fa-heart"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <h6 class="card-title">{{ product.name }}</h6>
+                    <p class="card-text text-muted small">{{ product.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <div>
+                        <span class="fw-bold text-primary ms-1">{{ product.price }} ₽</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer bg-transparent border-0">
+                    <a href="{% url 'cart:cart_add' product.id %}" class="btn btn-primary w-100">
+                      <i class="fas fa-cart-plus me-2"></i>В корзину
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+          <!-- Pagination -->
+          {% if is_paginated %}
+            <nav aria-label="Pagination" class="mt-5">
+              <ul class="pagination justify-content-center">
+                <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                  <a class="page-link"
+                     href="{% if page_obj.has_previous %} {% url 'products:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                     tabindex="-1">Предыдущая</a>
+                </li>
+
+                {% for page in paginator.page_range %}
+                  {% if page_obj.number != page %}
+                    <li class="page-item">
+                      <a class="page-link" href="{% url 'products:paginator' page %}">{{ page }}</a>
+                    </li>
+                  {% else %}
+                    <li class="page-item disabled ">
+                      <a class="page-link disabled" href="{% url 'products:paginator' page %}">{{ page }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+
+                <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                  <a class="page-link"
+                     href="{% if page_obj.has_next %} {% url 'products:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">Следующая</a>
+                </li>
+              </ul>
+            </nav>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
