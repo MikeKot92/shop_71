@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
+from django.contrib import messages
 from products.models import Product
 
 from .models import Cart
@@ -21,10 +21,12 @@ def cart_add(request, product_id):
     carts = Cart.objects.filter(user=request.user, product=product)
     if not carts.exists():
         Cart.objects.create(user=request.user, product=product, quantity=1)
+        messages.success(request, f"Товар  добавлен в корзину!")
     else:
         cart = carts.first()
         cart.quantity += 1
         cart.save()
+        messages.success(request, f"Товар  добавлен в корзину!")
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

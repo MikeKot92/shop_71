@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -5,7 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import HttpResponseRedirect, reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView, UpdateView
-
+from django.contrib.auth.views import LogoutView
 from common.views import TitleMixin
 from orders.models import Order
 from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
@@ -59,3 +60,10 @@ class UserRegistrationView(SuccessMessageMixin, TitleMixin, CreateView):
     success_url = reverse_lazy('products:home')
     success_message = 'Вы успешно зарегестрировались!'
     title = 'Registration'
+
+class UserLogoutView(LogoutView):
+    success_message = 'Вы вышли из аккаунта!'
+
+    def dispatch(self, request, *args, **kwargs):
+        messages.success(request, self.success_message)
+        return super().dispatch(request, *args, **kwargs)
