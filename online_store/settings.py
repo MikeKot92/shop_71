@@ -30,9 +30,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ['DEBUG'] == 'True'
 
 DOMAIN_NAME = os.environ['DOMAIN_NAME']
-ALLOWED_HOSTS = [DOMAIN_NAME]
 
-
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = [DOMAIN_NAME]
 # Application definition
 
 INSTALLED_APPS = [
@@ -88,7 +90,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'online_store.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = [f'http://{DOMAIN_NAME}', f'https://{DOMAIN_NAME}']
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = [f'http://{DOMAIN_NAME}', f'https://{DOMAIN_NAME}']
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -123,8 +126,6 @@ DATABASES = {
         'PORT': os.environ['DB_PORT'],
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -208,3 +209,9 @@ CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 # Stripe
 STRIPE_PUBLIC_KEY = os.environ['STRIPE_PUBLIC_KEY']
 STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_KEY']
+if DEBUG:
+    SUCCESS_URL_STRIPE = DOMAIN_NAME + '/order/success'
+    CANCEL_URL_STRIPE = DOMAIN_NAME + '/order/cancel'
+else:
+    SUCCESS_URL_STRIPE = 'https://' + DOMAIN_NAME + '/order/success'
+    CANCEL_URL_STRIPE = 'https://' + DOMAIN_NAME + '/order/cancel'

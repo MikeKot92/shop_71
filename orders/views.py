@@ -26,8 +26,8 @@ class OrderCreateView(TitleMixin, CreateView):
         checkout_session = stripe.checkout.Session.create(
             line_items=line_items,
             mode='payment',
-            success_url='https://' + settings.DOMAIN_NAME + '/order/success',
-            cancel_url='https://' + settings.DOMAIN_NAME + '/order/cancel',
+            success_url=settings.SUCCESS_URL_STRIPE,
+            cancel_url=settings.CANCEL_URL_STRIPE,
         )
         order = Order.objects.get(id=self.object.id)
         order.order_items_history(carts)
