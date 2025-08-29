@@ -1,0 +1,55 @@
+name: Deploy Shop
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          echo "Deploying to server..."
+          
+          cd /var/www/myshop
+          
+          # Pull latest code
+          echo "Pulling latest code from main branch..."
+          git pull origin main
+          
+          # Activate virtual environment
+          echo "Activating virtual environment..."
+          source env/bin/activate
+          
+          # Upgrade pip and install dependencies
+          echo "Upgrading pip and installing dependencies..."
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          
+          # Apply database migrations
+          echo "Applying database migrations..."
+          python manage.py migrate --noinput
+          
+          # Collect static files
+          echo "Collecting static files..."
+          python manage.py collectstatic --noinput
+          
+          # Restart services
+          echo "Restarting services..."
+          sudo systemctl daemon-reload
+          sudo systemctl restart gunicorn
+          sudo systemctl restart nginx
+          sudo systemctl restart celery
+          
+          # Check service status
+          echo "Checking service status..."
+          sudo systemctl status gunicorn
+          sudo systemctl status nginx
+          sudo systemctl status celery
