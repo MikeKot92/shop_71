@@ -9,4 +9,5 @@ urlpatterns = [
     path('catalog/', views.ProductListView.as_view(), name='catalog'),
     path('category/<int:category_id>/', views.ProductListView.as_view(), name='category'),
     path('page/<int:page>/', views.ProductListView.as_view(), name='paginator'),
+    path('product/<int:pk>/', views.ProductDetailView.as_view(), name='product'),
 ]

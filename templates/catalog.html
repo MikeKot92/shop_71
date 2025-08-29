@@ -67,6 +67,7 @@
             {% for product in object_list %}
               <!-- Product 1 -->
               <div class="col-lg-4 col-md-6">
+              <a href="{% url 'products:product' product.pk %}" style="text-decoration: none; " class="product-link">
                 <div class="card product-card h-100 border-0 shadow-sm">
                   <div class="position-relative">
                     <img src="{{ product.image.url }}" class="card-img-top"
@@ -93,6 +94,7 @@
                     </a>
                   </div>
                 </div>
+                </a>
               </div>
             {% endfor %}
 

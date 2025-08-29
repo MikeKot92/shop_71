@@ -1,4 +1,4 @@
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 
 from common.views import TitleMixin
 
@@ -27,3 +27,11 @@ class ProductListView(TitleMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = ProductCategory.objects.all()
         return context
+
+class ProductDetailView(TitleMixin, DetailView):
+    title = 'Product'
+    model = Product
+    template_name = 'product_detail.html'
+    context_object_name = 'product'
+
+
