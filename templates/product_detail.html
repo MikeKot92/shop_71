@@ -17,8 +17,12 @@
 
                 <!-- Цена и количество -->
                 <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="text-success">Цена: {{ product.price }} ₽</h4>
-                    <span class="badge bg-secondary">В наличии: {{ product.quantity }}</span>
+                    <h4 class="text-secondary">Цена: {{ product.price }} ₽</h4>
+                  {% if product.quantity > 0 %}
+                    <span class="badge bg-success">В наличии: {{ product.quantity }}</span>
+                  {% else %}
+                    <span class="badge bg-danger">Нет в наличии</span>
+                  {% endif %}
                 </div>
 
                 <hr>
