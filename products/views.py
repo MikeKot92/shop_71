@@ -8,8 +8,12 @@ from .models import Product, ProductCategory
 class IndexView(TitleMixin, TemplateView):
     template_name = 'index.html'
     title = 'Home'
-    extra_context = {'popular_products': Product.objects.all()[:4]}
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = Product.objects.all()
+        context['popular_products'] = queryset[:4]
+        return context
 
 class ProductListView(TitleMixin, ListView):
     model = Product
