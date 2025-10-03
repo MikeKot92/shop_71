@@ -12,16 +12,32 @@
   <script src="https://unpkg.com/htmx.org"></script>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-<!-- Navigation -->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <div class="container">
     <a class="navbar-brand fw-bold" href="{% url 'products:home' %}">
       <i class="fas fa-dumbbell me-2"></i>SportShop
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="d-flex align-items-center order-lg-2 mobile-nav-icons">
+      <div id="cart_badge" class="me-2">
+        {% include 'cart_badge.html' %}
+      </div>
+      {% if user.is_authenticated %}
+        <a href="{% url 'users:profile' user.id %}" class="btn btn-outline-light me-3">
+          <i class="fas fa-user"></i>
+        </a>
+      {% else %}
+        <a href="{% url 'users:login' %}" class="btn btn-outline-light me-3">
+          <i class="fas fa-sign-in-alt"></i>
+        </a>
+      {% endif %}
+    
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  
+    <div class="collapse navbar-collapse order-lg-1" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link active" href="{% url 'products:home' %}">Главная</a>
@@ -30,36 +46,12 @@
           <a class="nav-link" href="{% url 'products:catalog' %}">Каталог</a>
         </li>
       </ul>
-      <div class="d-flex align-items-center">
-
-        <a href="{% url 'cart:cart' %}" class="btn btn-outline-light position-relative me-2">
-          <i class="fas fa-shopping-cart"></i>
-
-          {% if carts.total_quantity %}
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ carts.total_quantity }}
-            </span>
-          {% endif %}
-          
-        </a>
-
-        {% if user.is_authenticated %}
-          <a href="{% url 'users:profile' user.id %}" class="btn btn-outline-light position-relative me-2">
-            <i class="fas fa-user"></i>
-          </a>
-        {% else %}
-          <a href="{% url 'users:login' %}" class="btn btn-outline-light position-relative me-2">
-            <i class="fas fa-sign-in-alt me-2"></i>
-          </a>
-        {% endif %}
-
-
-      </div>
     </div>
+
+
   </div>
 </nav>
 
-<!-- Message -->
 {% if messages %}
   {% for message in messages %}
     <div id="popupMessage" class="alert alert-{{ message.tags }} d-flex align-items-center justify-content-center"
@@ -73,7 +65,7 @@
 
 {% endblock %}
 
-<!-- Footer -->
+ 
 <footer class="bg-dark text-white py-5">
   <div class="container">
     <div class="row g-4">
@@ -129,7 +121,7 @@
     <hr class="my-4">
     <div class="row align-items-center">
       <div class="col-md-6">
-        <p class="mb-0 text-white-50">&copy; 2024 SportShop. Все права защищены.</p>
+        <p class="mb-0 text-white-50">&copy; 2025 SportShop. Все права защищены.</p>
       </div>
       <div class="col-md-6 text-md-end">
         <a href="#" class="text-white-50 text-decoration-none me-3">Политика конфиденциальности</a>

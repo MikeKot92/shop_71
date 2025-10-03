@@ -16,7 +16,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class OrderCreateView(TitleMixin, CreateView):
     template_name = 'create_order.html'
     form_class = OrderForm
-    title = 'Оформление закза'
+    title = 'Оформление заказа'
     success_url = reverse_lazy('orders:create')
 
     def post(self, request, *args, **kwargs):

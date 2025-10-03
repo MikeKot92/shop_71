@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+
 {% block content %}
-  
+
       <div class="container py-5 mt-5 mb-5">
         <div class="row">
             <!-- Левая колонка: Изображение продукта -->
@@ -32,13 +35,17 @@
 
                 <!-- Кнопка добавления в корзину -->
                 <div class="card-footer bg-transparent border-0">
-                    <a href="{% url 'cart:cart_add' product.id %}" class="btn btn-primary w-100">
-                      <i class="fas fa-cart-plus me-2"></i>В корзину
-                    </a>
+                    <button
+                        hx-post="{% url 'cart:cart_add' product.id %}"
+                        hx-target="#cart_badge"
+                        hx-swap="innerHTML"
+                        class="btn btn-primary w-100">
+                        <i class="fas fa-cart-plus me-2"></i>В корзину
+                    </button>
                 </div>
-              
+
             </div>
         </div>
     </div>
-  
+
 {% endblock%}
