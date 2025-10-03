@@ -357,10 +357,20 @@ html {
     margin-left: auto;
   }
 
+  /* Smaller buttons and icons on mobile */
   .mobile-nav-icons .btn {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
   }
+
+  .mobile-nav-icons .btn i {
+    font-size: 0.875rem;
+  }
+
+  #cart_badge .btn i {
+    font-size: 0.875rem;
+  }
+  /* </CHANGE> */
 
   .navbar-toggler {
     padding: 0.25rem 0.5rem;
